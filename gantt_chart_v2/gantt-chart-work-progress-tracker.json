@@ -49,14 +49,14 @@
             "children": [
               {
                 "elmType": "span",
-                "txtContent": "=toLocaleDateString('[$TimelineStart]')",
+                "txtContent": "=toLocaleDateString('[$GanttChartStart]')",
                 "style": {
                   "text-align": "left"
                 }
               },
               {
                 "elmType": "span",
-                "txtContent": "=toLocaleDateString([$TimelineEnd])",
+                "txtContent": "=toLocaleDateString([$GanttChartEnd])",
                 "style": {
                   "position": "absolute",
                   "right": "0"
@@ -69,26 +69,26 @@
                   "position": "relative",
                   "width": "100px",
                   "z-index": "100",
-                  "display": "=if([$TimelineEnd] < @now , 'none', 'block')",
-                  "left": "=floor((Number(@now)-Number(Date([$TimelineStart])))/(Number(Date([$TimelineEnd]))-Number(Date([$TimelineStart])))*100 )+'%'"
+                  "display": "=if([$GanttChartEnd] < @now , 'none', 'block')",
+                  "left": "=floor((Number(@now)-Number(Date([$GanttChartStart])))/(Number(Date([$GanttChartEnd]))-Number(Date([$GanttChartStart])))*100 )+'%'"
                 }
               },
               {
                 "elmType": "span",
                 "attributes": {
-                  "title": "=(Number(@now)-Number(Date([$TimelineStart]))) / (Number(Date([$TimelineEnd]))-Number(Date([$TimelineStart]))) * 100 + '%'",
+                  "title": "=(Number(@now)-Number(Date([$GanttChartStart]))) / (Number(Date([$GanttChartEnd]))-Number(Date([$GanttChartStart]))) * 100 + '%'",
                   "class": "ms-borderColor-gray"
                 },
                 "style": {
                   "position": "relative",
-                  "display": "=if([$TimelineEnd] < @now , 'none', 'block')",
+                  "display": "=if([$GanttChartEnd] < @now , 'none', 'block')",
                   "top": "-2.6em",
                   "z-index": "100",
                   "border-left-width": "1px",
                   "border-left-style": "dotted",
                   "height": "2.6em",
                   "width": "1em",
-                  "left": "=(Number(@now)-Number(Date([$TimelineStart]))) / (Number(Date([$TimelineEnd]))-Number(Date([$TimelineStart]))) * 100 + '%'"
+                  "left": "=(Number(@now)-Number(Date([$GanttChartStart]))) / (Number(Date([$GanttChartEnd]))-Number(Date([$GanttChartStart]))) * 100 + '%'"
                 }
               }
             ]
@@ -110,9 +110,9 @@
               "padding-top": "0.55em"
             },
             "attributes": {
-              "iconName": "=if([$Status] == 'Completed', 'CompletedSolid', if([$Status] == 'In Progress', 'CircleRing', if([$Status] == 'At Risk', 'IncidentTriangle', if([$Status] == 'Missed Deadline', 'EventDateMissed12', 'HourGlass'))))",
-              "title": "=if([$EndDate] > [$TimelineEnd], 'Task is past timeline date range', if([$EndDate] < [$TimelineStart], 'Task is before timeline date range', [$Status]))",
-              "class": "='ms-fontSize-13 ms-fontColor-' + if([$Status] == 'Completed', 'sharedGreen20', if([$Status] == 'In Progress', 'sharedBlue20', if([$Status] == 'At Risk', 'sharedOrange10', if([$Status] == 'Missed Deadline', 'sharedRed10', 'sharedGray20'))))"
+              "iconName": "=if([$Progress] == 'Completed', 'CompletedSolid', if([$Progress] == 'In progress', 'CircleRing', if([$Progress] == 'Blocked', 'IncidentTriangle', if([$Progress] == 'Behind', 'EventDateMissed12', 'HourGlass'))))",
+              "title": "=if([$DueDate] > [$GanttChartEnd], 'Task is past timeline date range', if([$DueDate] < [$GanttChartStart], 'Task is before timeline date range', [$Progress]))",
+              "class": "='ms-fontSize-13 ms-fontColor-' + if([$Progress] == 'Completed', 'sharedGreen20', if([$Progress] == 'In Progress', 'sharedBlue20', if([$Progress] == 'Blocked', 'sharedOrange10', if([$Progress] == 'Behind', 'sharedRed10', 'sharedGray20'))))"
             }
           },
           {
@@ -172,12 +172,12 @@
                   "line-height": "12px",
                   "border-width": "1px",
                   "border-style": "solid",
-                  "left": "=if([$StartDate] > [$TimelineEnd], '100%', if([$EndDate] < [$TimelineStart], '0px', if([$StartDate] < [$TimelineStart], '0px', (Number([$StartDate])-Number(Date([$TimelineStart]))) / (Number(Date([$TimelineEnd]))-Number(Date([$TimelineStart]))) * 100) + '%'))",
-                  "width": "=if([$StartDate] > [$TimelineEnd], '40px', if([$EndDate] < [$TimelineStart], '40px', if([$EndDate] > [$TimelineEnd], (Number(Date([$TimelineEnd]))-Number([$StartDate])+ 86400000) / (Number(Date([$TimelineEnd]))-Number(Date([$TimelineStart]))+ 86400000) * 100, (Number([$EndDate])-Number([$StartDate])+ 86400000) / (Number(Date([$TimelineEnd]))-Number(Date([$TimelineStart]))+ 86400000) * 100) + '%'))"
+                  "left": "=if([$StartDate] > [$GanttChartEnd], '100%', if([$DueDate] < [$GanttChartStart], '0px', if([$StartDate] < [$GanttChartStart], '0px', (Number([$StartDate])-Number(Date([$GanttChartStart]))) / (Number(Date([$GanttChartEnd]))-Number(Date([$GanttChartStart]))) * 100) + '%'))",
+                  "width": "=if([$StartDate] > [$GanttChartEnd], '40px', if([$DueDate] < [$GanttChartStart], '40px', if([$DueDate] > [$GanttChartEnd], (Number(Date([$GanttChartEnd]))-Number([$StartDate])+ 86400000) / (Number(Date([$GanttChartEnd]))-Number(Date([$GanttChartStart]))+ 86400000) * 100, (Number([$DueDate])-Number([$StartDate])+ 86400000) / (Number(Date([$GanttChartEnd]))-Number(Date([$GanttChartStart]))+ 86400000) * 100) + '%'))"
                 },
                 "attributes": {
-                  "title": "=if([$ResponsibleGroup]=='','',[$ResponsibleGroup] + ' - ') + [$Title] + ' - ' + toLocaleDateString([$StartDate]) + ' - ' + toLocaleDateString([$EndDate])",
-                  "class": "=if([$Status] == 'Completed', 'ms-borderColor-sharedRCyan30 ms-bgColor-sharedCyan40 ms-fontColor-white', if([$Status] == 'In Progress', 'ms-borderColor-blueMid ms-bgColor-blue ms-fontColor-white', if([$Status] == 'At Risk', 'ms-borderColor-sharedOrange20 ms-bgColor-sharedOrange10 ms-fontColor-black', if([$Status] == 'Missed Deadline', 'ms-borderColor-sharedRed20 ms-bgColor-sharedRed10 ms-fontColor-white', ''))))"
+                  "title": "=if([$Category]=='','',[$Category] + ' - ') + [$Title] + ' - ' + toLocaleDateString([$StartDate]) + ' - ' + toLocaleDateString([$DueDate])",
+                  "class": "=if([$Progress] == 'Completed', 'ms-borderColor-sharedRCyan30 ms-bgColor-sharedCyan40 ms-fontColor-white', if([$Progress] == 'In progress', 'ms-borderColor-blueMid ms-bgColor-blue ms-fontColor-white', if([$Progress] == 'Blocked', 'ms-borderColor-sharedOrange20 ms-bgColor-sharedOrange10 ms-fontColor-black', if([$Progress] == 'Behind', 'ms-borderColor-sharedRed20 ms-bgColor-sharedRed10 ms-fontColor-white', ''))))"
                 }
               },
               {
@@ -188,14 +188,14 @@
                 },
                 "style": {
                   "position": "relative",
-                  "display": "=if([$TimelineEnd] < @now , 'none', 'block')",
+                  "display": "=if([$GanttChartEnd] < @now , 'none', 'block')",
                   "top": "-1.6em",
                   "z-index": "100",
                   "border-left-width": "2px",
                   "border-left-style": "dotted",
                   "height": "2em",
                   "width": "1em",
-                  "left": "=(Number(@now)-Number(Date([$TimelineStart]))) / (Number(Date([$TimelineEnd]))-Number(Date([$TimelineStart]))) * 100 + '%'"
+                  "left": "=(Number(@now)-Number(Date([$GanttChartStart]))) / (Number(Date([$GanttChartEnd]))-Number(Date([$GanttChartStart]))) * 100 + '%'"
                 }
               }
             ]
