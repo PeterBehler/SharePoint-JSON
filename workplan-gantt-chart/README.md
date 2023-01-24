@@ -16,7 +16,7 @@ A list with basic columns
 
 Can display in a visual summary gantt chart, including preferred sort orders.
 
-![screenshot of gantt chart view](./assets/GanttChartView.png)  
+![screenshot of gantt chart view](./assets/screenshot.png)  
 
 And if you add grouping to your list view settings and then apply the formatting, it can look like this.
 
