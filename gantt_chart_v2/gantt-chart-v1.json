@@ -176,7 +176,7 @@
                   "width": "=if([$StartDate] > [$TimelineEnd], '40px', if([$EndDate] < [$TimelineStart], '40px', if([$EndDate] > [$TimelineEnd], (Number(Date([$TimelineEnd]))-Number([$StartDate])+ 86400000) / (Number(Date([$TimelineEnd]))-Number(Date([$TimelineStart]))+ 86400000) * 100, (Number([$EndDate])-Number([$StartDate])+ 86400000) / (Number(Date([$TimelineEnd]))-Number(Date([$TimelineStart]))+ 86400000) * 100) + '%'))"
                 },
                 "attributes": {
-                  "title": "=[$ResponsibleGroup] + ' - ' + [$Title] + ' - ' + toLocaleDateString([$StartDate]) + ' - ' + toLocaleDateString([$EndDate])",
+                  "title": "=if([$ResponsibleGroup]=='','',[$ResponsibleGroup] + ' - ') + [$Title] + ' - ' + toLocaleDateString([$StartDate]) + ' - ' + toLocaleDateString([$EndDate])",
                   "class": "=if([$Status] == 'Completed', 'ms-borderColor-sharedRCyan30 ms-bgColor-sharedCyan40 ms-fontColor-white', if([$Status] == 'In Progress', 'ms-borderColor-blueMid ms-bgColor-blue ms-fontColor-white', if([$Status] == 'At Risk', 'ms-borderColor-sharedOrange20 ms-bgColor-sharedOrange10 ms-fontColor-black', if([$Status] == 'Missed Deadline', 'ms-borderColor-sharedRed20 ms-bgColor-sharedRed10 ms-fontColor-white', ''))))"
                 }
               },
