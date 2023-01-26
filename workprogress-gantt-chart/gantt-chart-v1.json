@@ -49,7 +49,7 @@
             "children": [
               {
                 "elmType": "span",
-                "txtContent": "=toLocaleDateString('[$TimelineStart]')",
+                "txtContent": "=toLocaleDateString([$TimelineStart])",
                 "style": {
                   "text-align": "left"
                 }
